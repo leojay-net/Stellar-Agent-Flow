@@ -394,9 +394,9 @@ HTTP status codes: `200` success, `400` bad request, `500` server error, `502` u
 
 | Chain            | Chain ID | Status           |
 | ---------------- | -------- | ---------------- |
-| Base Mainnet     | 8453     | ✅ Primary        |
-| Ethereum Mainnet | 1        | ✅ ENS, Chainlink |
-| Base Sepolia     | 84532    | ✅ Testing        |
+| Base Mainnet     | 8453     |  Primary        |
+| Ethereum Mainnet | 1        |  ENS, Chainlink |
+| Base Sepolia     | 84532    |  Testing        |
 
 ---
 

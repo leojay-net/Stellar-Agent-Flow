@@ -27,26 +27,23 @@
 
 Imagine you have a team of little robot helpers. Each robot is really good at ONE thing:
 
-- One robot checks crypto prices 📊
-- One robot stakes your ETH to earn interest 🔥
-- One robot swaps tokens on a DEX 🔄
-- One robot thinks about the best strategy using AI 🧠
-- One robot executes transactions on the blockchain ⚡
+- One robot checks crypto prices 
+- One robot stakes your XLM to earn interest 
+- One robot swaps tokens on a DEX 
+- One robot thinks about the best strategy using AI 
+- One robot executes transactions on the blockchain 
 
 **AgentFlow lets you drag these robots onto a canvas, connect them together, and hit "Run" — and they all work together automatically, passing information from one to the next.**
 
 Think of it like building with LEGO blocks, but instead of building a house, you're building an automated crypto workflow.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   🧱 = An Agent (a robot that does one specific job)       │
-│                                                             │
-│   🧱 ──→ 🧱 ──→ 🧱 = A Pipeline (agents working together)│
-│                                                             │
-│   🖥️ = The Canvas (where you build your pipeline)          │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Canvas [The Canvas - Where you build your pipeline]
+        direction LR
+        Agent1[Agent: Data Fetcher] --> Agent2[Agent: Strategist]
+        Agent2 --> Agent3[Agent: Executor]
+    end
 ```
 
 ---
@@ -55,15 +52,15 @@ Think of it like building with LEGO blocks, but instead of building a house, you
 
 ### The Old Way (Hard)
 
-Let's say you want to do something simple in crypto — like "take my ETH, earn interest on it, and when the interest grows, swap it to USDC."
+Let's say you want to do something simple in crypto — like "take my XLM, earn interest on it, and when the interest grows, swap it to USDC."
 
 Without AgentFlow, here's what you'd have to do:
 
 ```
-Step 1: Go to Lido's website, connect wallet, stake ETH          (10 minutes)
+Step 1: Go to Stellar Staker's website, connect wallet, stake XLM          (10 minutes)
 Step 2: Wait for interest to build up                             (days/weeks)
-Step 3: Go to a price oracle website, check ETH price             (5 minutes)
-Step 4: Open a DEX like Uniswap, set up the swap                  (10 minutes)
+Step 3: Go to a price oracle website, check XLM price             (5 minutes)
+Step 4: Open a DEX like Soroban Swap, set up the swap                  (10 minutes)
 Step 5: Review gas fees, approve tokens, confirm swap              (10 minutes)
 Step 6: Check if the swap went through                             (5 minutes)
 
@@ -73,45 +70,28 @@ Total: 40+ minutes of clicking around on 4 different websites
 
 ### The AgentFlow Way (Easy)
 
+```mermaid
+flowchart LR
+    1[1. Drag Stellar Staker] --> 2[2. Drag Gemini Yield]
+    2 --> 3[3. Drag Soroban Swap V3]
+    3 --> 4[4. Connect lines]
+    4 --> 5((5. Run Flow))
 ```
-Step 1: Drag "Lido Staker" onto canvas
-Step 2: Drag "Venice Yield Strategist" onto canvas
-Step 3: Drag "Uniswap V3 Swap" onto canvas
-Step 4: Connect them with lines
-Step 5: Click "Run Flow"
 
 Total: Under 2 minutes. And it runs automatically every time.
-```
 
 ### Here's a Picture of the Difference
 
-```
-                    THE OLD WAY
-    ┌──────────┐  ┌──────────┐  ┌──────────┐
-    │  Lido    │  │  Price   │  │ Uniswap  │
-    │ Website  │  │  Website │  │ Website  │
-    └────┬─────┘  └────┬─────┘  └────┬─────┘
-         │             │             │
-         ▼             ▼             ▼
-    ┌──────────────────────────────────────┐
-    │    YOU doing everything manually     │
-    │    clicking, copying, pasting...     │
-    └──────────────────────────────────────┘
-
-
-                  THE AGENTFLOW WAY
-    ┌──────────┐     ┌──────────┐     ┌──────────┐
-    │  Lido    │────▶│  Venice  │────▶│ Uniswap  │
-    │  Staker  │     │  AI      │     │  Swap    │
-    └──────────┘     └──────────┘     └──────────┘
-         │               │                │
-         └───────────────┴────────────────┘
-                         │
-                         ▼
-                  ┌──────────────┐
-                  │  All done!   │
-                  │  Automatic!  │
-                  └──────────────┘
+```mermaid
+flowchart TD
+    User([You doing everything manually])
+    Stellar Staker[Stellar Staker Website]
+    Price[Price Oracle Website]
+    Soroban Swap[Soroban Swap Website]
+    
+    User -- Connections, Clicks, Copy/Paste --> Stellar Staker
+    User -- Check prices --> Price
+    User -- Execute Swaps --> Soroban Swap
 ```
 
 ---
@@ -124,13 +104,13 @@ Here are some examples:
 
 | Agent Name           | What It Does                                         | Real-World Comparison                                |
 | -------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| **Chainlink Oracle** | Checks the current price of ETH, BTC, etc.           | Like checking the stock ticker on your phone         |
-| **Lido Staker**      | Stakes your ETH to earn interest                     | Like putting money in a savings account              |
-| **Uniswap V3 Swap**  | Swaps one token for another                          | Like exchanging dollars for euros at the airport     |
-| **Venice Reasoner**  | AI that thinks about your data privately             | Like asking a financial advisor for advice           |
-| **ENS Resolver**     | Turns names like "vitalik.eth" into wallet addresses | Like looking up someone's phone number by their name |
+| **Asset Pricer Oracle** | Checks the current price of XLM, BTC, etc.           | Like checking the stock ticker on your phone         |
+| **Stellar Staker**      | Stakes your XLM to earn interest                     | Like putting money in a savings account              |
+| **Soroban Swap V3 Swap**  | Swaps one token for another                          | Like exchanging dollars for euros at the airport     |
+| **Gemini Reasoner**  | AI that thinks about your data privately             | Like asking a financial advisor for advice           |
+| **Federation Resolver**     | Turns names like "astrobob*stellar.org" into wallet addresses | Like looking up someone's phone number by their name |
 | **Bankr Wallet**     | Checks your wallet balance                           | Like checking your bank account balance              |
-| **Base TX Executor** | Sends transactions on Base chain                     | Like hitting "Send" on a bank transfer               |
+| **Soroban TX Executor** | Sends transactions on Soroban chain                     | Like hitting "Send" on a bank transfer               |
 
 ### Why "Agents" and Not Just "Apps"?
 
@@ -153,13 +133,13 @@ When you open AgentFlow, you see a big dark canvas (like a whiteboard). Here's w
 │ ┌─ SIDEBAR ─┐  ┌─ CANVAS ──────────────────────────────────────┐  │
 │ │            │  │                                                │  │
 │ │ Search...  │  │    ┌──────────┐       ┌──────────┐           │  │
-│ │            │  │    │  Lido    │──────▶│  Venice  │           │  │
+│ │            │  │    │  Stellar Staker    │──────▶│  Gemini  │           │  │
 │ │ ○ All      │  │    │  Staker  │       │  AI      │           │  │
 │ │ ○ DeFi     │  │    └──────────┘       └────┬─────┘           │  │
 │ │ ○ AI       │  │                            │                  │  │
 │ │ ○ Oracle   │  │                            ▼                  │  │
 │ │ ○ Identity │  │                     ┌──────────┐              │  │
-│ │ ○ Payments │  │                     │ Uniswap  │              │  │
+│ │ ○ Payments │  │                     │ Soroban Swap  │              │  │
 │ │            │  │                     │  Swap    │              │  │
 │ │ ┌────────┐ │  │                     └──────────┘              │  │
 │ │ │ Agent  │ │  │                                                │  │
@@ -169,9 +149,9 @@ When you open AgentFlow, you see a big dark canvas (like a whiteboard). Here's w
 │ └────────────┘  └────────────────────────────────────────────────┘  │
 │                                                                     │
 │ ┌─ LOG PANEL ────────────────────────────────────────────────────┐ │
-│ │  Step 1: Lido Staker — Completed in 2400ms — APR 3.43%       │ │
-│ │  Step 2: Venice AI — Completed in 8500ms — SWAP_TO_USDC      │ │
-│ │  Step 3: Uniswap Swap — Completed in 3200ms — 2.09 USDC     │ │
+│ │  Step 1: Stellar Staker — Completed in 2400ms — APR 3.43%       │ │
+│ │  Step 2: Gemini AI — Completed in 8500ms — SWAP_TO_USDC      │ │
+│ │  Step 3: Soroban Swap Swap — Completed in 3200ms — 2.09 USDC     │ │
 │ └────────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -195,7 +175,7 @@ When you open AgentFlow, you see a big dark canvas (like a whiteboard). Here's w
 
 **Step 1: Find the agent you want**
 - Look at the sidebar on the left
-- Use the search bar to find agents by name (e.g., type "Lido")
+- Use the search bar to find agents by name (e.g., type "Stellar Staker")
 - Or click a category filter (DeFi, AI, Oracle, etc.)
 
 **Step 2: Drag it onto the canvas**
@@ -219,15 +199,25 @@ When you open AgentFlow, you see a big dark canvas (like a whiteboard). Here's w
 - Click **"Execute Pipeline"**
 - Watch the Log Panel — each agent lights up green as it completes
 
-```
-Your Pipeline Building Journey:
-
-  Empty Canvas          Add Agents           Connect Them           Run!
-  ┌──────────┐      ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-  │          │      │  [A]  [B]    │     │  [A]──▶[B]   │     │  [A]✅▶[B]✅ │
-  │          │  ──▶ │       [C]    │ ──▶ │       ↗      │ ──▶ │       ↗      │
-  │          │      │              │     │  [C]─┘       │     │  [C]✅┘      │
-  └──────────┘      └──────────────┘     └──────────────┘     └──────────────┘
+```mermaid
+flowchart LR
+    subgraph S1 [Empty Canvas]
+        Empty
+    end
+    subgraph S2 [Add Agents]
+        A
+        B
+        C
+    end
+    subgraph S3 [Connect Them]
+        A2[A] --> B2[B]
+        C2[C] --> B2
+    end
+    subgraph S4 [Run!]
+        A3[A] -.-> B3[B]
+        C3[C] -.-> B3
+    end
+    S1 --> S2 --> S3 --> S4
 ```
 
 ### Method 2: Ask Agent X (Chat)
@@ -237,7 +227,7 @@ Instead of dragging and dropping, you can just talk to Agent X (the AI assistant
 **Step 1:** Click the purple chat bubble icon in the toolbar
 
 **Step 2:** Type something like:
-> "Build me a DeFi yield pipeline with Lido staking, Venice AI strategy, and Uniswap swap"
+> "Build me a DeFi yield pipeline with Stellar Staker staking, Gemini AI strategy, and Soroban Swap swap"
 
 **Step 3:** Watch the magic happen — Agent X will:
 - Clear the canvas
@@ -248,14 +238,14 @@ Instead of dragging and dropping, you can just talk to Agent X (the AI assistant
 **Step 4:** Say "Run the pipeline" in the chat, or click Run Flow
 
 ```
- You type:  "Build me a DeFi pipeline with Lido and Uniswap"
+ You type:  "Build me a DeFi pipeline with Stellar Staker and Soroban Swap"
                               │
                               ▼
  Agent X:   "I'll build that for you!"
                               │
              ┌────────────────┼─────────────────┐
              ▼                ▼                  ▼
-    Adds Lido Staker   Adds Venice AI    Adds Uniswap Swap
+    Adds Stellar Staker   Adds Gemini AI    Adds Soroban Swap Swap
     to canvas (0.5s)   to canvas (0.5s)  to canvas (0.5s)
              │                │                  │
              └────────────────┼─────────────────┘
@@ -290,10 +280,10 @@ AgentFlow gives you **three different ways** to interact with it. Use whichever 
 | What You Type                   | What Happens                                            |
 | ------------------------------- | ------------------------------------------------------- |
 | "Build me a DeFi pipeline"      | Agent X creates a full workflow on the canvas           |
-| "Check the price of ETH"        | Runs the Chainlink Oracle agent and shows you the price |
-| "Swap 0.001 ETH to USDC"        | Runs Uniswap V3 Swap with a real quote                  |
+| "Check the price of XLM"        | Runs the Asset Pricer Oracle agent and shows you the price |
+| "Swap 0.001 XLM to USDC"        | Runs Soroban Swap V3 Swap with a real quote                  |
 | "Run the pipeline"              | Executes whatever is on the canvas                      |
-| "Add a price oracle to my flow" | Adds a Chainlink Oracle to the existing canvas          |
+| "Add a price oracle to my flow" | Adds a Asset Pricer Oracle to the existing canvas          |
 | "What agents do you have?"      | Lists all available agents by category                  |
 
 ### Way 3: API (Code — for developers and other AI agents)
@@ -339,70 +329,70 @@ Here are real things you can do with AgentFlow, explained like stories:
 
 ---
 
-### Scenario 1: "I Want to Earn Interest on My ETH"
+### Scenario 1: "I Want to Earn Interest on My XLM"
 
-**The story:** You have some ETH sitting in your wallet doing nothing. You want it to earn interest, like a savings account. But you also want an AI to watch over it and tell you what's happening.
+**The story:** You have some XLM sitting in your wallet doing nothing. You want it to earn interest, like a savings account. But you also want an AI to watch over it and tell you what's happening.
 
 **The pipeline:**
 
 ```
   ┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-  │ Lido Staker  │──────▶│ Lido Vault   │──────▶│ Venice Yield │
+  │ Stellar Staker  │──────▶│ Stellar Staker Vault   │──────▶│ Gemini Yield │
   │              │       │ Monitor      │       │ Strategist   │
   │ Stakes your  │       │ Watches your │       │ AI thinks    │
-  │ ETH in Lido  │       │ stETH balance│       │ about what   │
-  │ to earn stETH│       │ and reports  │       │ to do next   │
+  │ XLM in Stellar Staker  │       │ stXLM balance│       │ about what   │
+  │ to earn stXLM│       │ and reports  │       │ to do next   │
   └──────────────┘       └──────────────┘       └──────────────┘
 
-  Step 1: Lido Staker stakes 0.1 ETH → gets stETH earning 3.43% APR
-  Step 2: Vault Monitor reads your balance → "You have 0.1003 stETH ($213.64)"
-  Step 3: Venice AI says → "HOLD — yield is growing steadily, no action needed"
+  Step 1: Stellar Staker stakes 0.1 XLM → gets stXLM earning 3.43% APR
+  Step 2: Vault Monitor reads your balance → "You have 0.1003 stXLM ($213.64)"
+  Step 3: Gemini AI says → "HOLD — yield is growing steadily, no action needed"
 ```
 
 **How to do it:**
-- Chat method: Type "Build me a Lido yield monitoring pipeline"
-- Canvas method: Drag Lido Staker → Lido Vault Monitor → Venice Yield Strategist, connect them
+- Chat method: Type "Build me a Stellar Staker yield monitoring pipeline"
+- Canvas method: Drag Stellar Staker → Stellar Staker Vault Monitor → Gemini Yield Strategist, connect them
 
 ---
 
-### Scenario 2: "I Want to Swap ETH to USDC But I Want AI to Decide If It's a Good Time"
+### Scenario 2: "I Want to Swap XLM to USDC But I Want AI to Decide If It's a Good Time"
 
-**The story:** You want to convert some ETH to USDC (a stablecoin pegged to the US dollar). But you don't want to do it at a bad time — maybe gas fees are too high, or the price is dipping. You want an AI to look at everything and decide: should I swap NOW, WAIT, or SKIP it?
+**The story:** You want to convert some XLM to USDC (a stablecoin pegged to the US dollar). But you don't want to do it at a bad time — maybe gas fees are too high, or the price is dipping. You want an AI to look at everything and decide: should I swap NOW, WAIT, or SKIP it?
 
 **The pipeline:**
 
 ```
   ┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-  │ Chainlink    │──────▶│ Uniswap      │──────▶│ Uniswap      │
+  │ Asset Pricer    │──────▶│ Soroban Swap      │──────▶│ Soroban Swap      │
   │ Oracle       │       │ Strategy     │       │ V3 Swap      │
   │              │       │ Advisor      │       │              │
-  │ Gets the     │       │ Venice AI    │       │ Actually     │
-  │ current ETH  │       │ decides:     │       │ does the     │
+  │ Gets the     │       │ Gemini AI    │       │ Actually     │
+  │ current XLM  │       │ decides:     │       │ does the     │
   │ price        │       │ EXECUTE,     │       │ swap on-     │
   │              │       │ WAIT, or     │       │ chain        │
   │              │       │ SKIP         │       │              │
   └──────────────┘       └──────────────┘       └──────────────┘
 
-  Step 1: Chainlink says → "ETH/USD = $2,146.12"
+  Step 1: Asset Pricer says → "XLM/USD = $2,146.12"
   Step 2: Strategy AI says → "EXECUTE — gas is low, price is stable, good time to swap"
-  Step 3: Uniswap quotes → "0.001 ETH = 2.09 USDC, transaction ready to sign"
+  Step 3: Soroban Swap quotes → "0.001 XLM = 2.09 USDC, transaction ready to sign"
 ```
 
 **How to do it:**
-- Chat method: Type "Create a smart swap pipeline with price check, AI strategy, and Uniswap"
-- Canvas method: Drag Chainlink Oracle → Uniswap Strategy Advisor → Uniswap V3 Swap
+- Chat method: Type "Create a smart swap pipeline with price check, AI strategy, and Soroban Swap"
+- Canvas method: Drag Asset Pricer Oracle → Soroban Swap Strategy Advisor → Soroban Swap V3 Swap
 
 ---
 
 ### Scenario 3: "I Want to Check if Someone's Identity is Legit Before Sending Them Money"
 
-**The story:** You're building a payment system. Before you send money to someone, you want to make sure they're a real person (identity check) and that their wallet address is correct (ENS lookup). Then you send the payment on Celo (a cheap blockchain).
+**The story:** You're building a payment system. Before you send money to someone, you want to make sure they're a real person (identity check) and that their wallet address is correct (Federation lookup). Then you send the payment on Celo (a cheap blockchain).
 
 **The pipeline:**
 
 ```
   ┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-  │ ENS Resolver │──────▶│ SELF         │──────▶│ Celo Stable  │
+  │ Federation Resolver │──────▶│ SELF         │──────▶│ Celo Stable  │
   │              │       │ Identity     │       │ Transfer     │
   │ Turns        │       │              │       │              │
   │ "bob.eth"    │       │ Checks if    │       │ Sends $5     │
@@ -412,9 +402,9 @@ Here are real things you can do with AgentFlow, explained like stories:
   │              │       │ ality, etc.) │       │              │
   └──────────────┘       └──────────────┘       └──────────────┘
 
-  Step 1: ENS Resolver → "bob.eth = 0x1234...abcd"
-  Step 2: SELF Identity → "Verified: age_over_18 ✅, nationality ✅"
-  Step 3: Celo Transfer → "Sent 5.00 cUSD to 0x1234...abcd ✅"
+  Step 1: Federation Resolver → "bob.eth = 0x1234...abcd"
+  Step 2: SELF Identity → "Verified: age_over_18 , nationality "
+  Step 3: Celo Transfer → "Sent 5.00 cUSD to 0x1234...abcd "
 ```
 
 ---
@@ -427,7 +417,7 @@ Here are real things you can do with AgentFlow, explained like stories:
 
 ```
   ┌──────────────┐       ┌──────────────┐       ┌──────────────┐
-  │ Snapshot     │──────▶│ Venice       │──────▶│ Octant Grant │
+  │ Snapshot     │──────▶│ Gemini       │──────▶│ Octant Grant │
   │ Voter        │       │ Reasoner     │       │ Allocator    │
   │              │       │              │       │              │
   │ Fetches      │       │ AI analyzes  │       │ Distributes  │
@@ -437,7 +427,7 @@ Here are real things you can do with AgentFlow, explained like stories:
   └──────────────┘       └──────────────┘       └──────────────┘
 
   Step 1: Snapshot finds 3 active proposals on governance
-  Step 2: Venice AI analyzes → "Proposal A: Strong, Proposal B: Weak, Proposal C: Medium"
+  Step 2: Gemini AI analyzes → "Proposal A: Strong, Proposal B: Weak, Proposal C: Medium"
   Step 3: Octant allocates → "Grant weights: A=50%, B=10%, C=40%"
 ```
 
@@ -451,20 +441,20 @@ Here are real things you can do with AgentFlow, explained like stories:
   ┌──────────────────────────────────────────────┐
   │              Your AI Agent                    │
   │                                               │
-  │  "I need to check the ETH price and maybe    │
+  │  "I need to check the XLM price and maybe    │
   │   do a swap if it's above $2000"             │
   │                                               │
   └──────────────────┬────────────────────────────┘
                      │
                      │  POST /api/chat
-                     │  { "message": "Get ETH price" }
+                     │  { "message": "Get XLM price" }
                      │
                      ▼
   ┌──────────────────────────────────────────────┐
   │              AgentFlow                        │
   │                                               │
   │  Agent X understands your intent             │
-  │  → dispatches Chainlink Oracle               │
+  │  → dispatches Asset Pricer Oracle               │
   │  → returns: { price: $2,146.12 }            │
   │                                               │
   └──────────────────┬────────────────────────────┘
@@ -477,7 +467,7 @@ Here are real things you can do with AgentFlow, explained like stories:
   │                                               │
   │  "Price is $2,146 — above $2000!"            │
   │  → calls POST /api/chat                      │
-  │  → "Swap 0.001 ETH to USDC"                 │
+  │  → "Swap 0.001 XLM to USDC"                 │
   │  → gets back a ready-to-sign transaction     │
   │                                               │
   └──────────────────────────────────────────────┘
@@ -493,17 +483,17 @@ All 40+ agents are organized into categories. Here's what each category means:
   CATEGORIES AT A GLANCE
 
   ┌─────────────┬─────────────┬─────────────┬─────────────┐
-  │   🟢 DeFi   │   🟣 AI     │   🟡 Oracle  │   🔵 Core   │
+  │    DeFi   │    AI     │    Oracle  │    Core   │
   │ Swap, stake │ Think, plan │ Get data    │ Orchestrate │
   │ lend, earn  │ strategize  │ prices,     │ route, and  │
   │             │ privately   │ feeds       │ compose     │
   ├─────────────┼─────────────┼─────────────┼─────────────┤
-  │   🩵 Identity│  🟠 Auth    │  💚 Trust    │  🔵 Chain   │
-  │ ENS names,  │ MetaMask    │ Verify,     │ Send        │
+  │    Identity│   Auth    │   Trust    │   Chain   │
+  │ Federation names,  │ MetaMask    │ Verify,     │ Send        │
   │ SELF verify │ delegation, │ ERC-8004,   │ transactions│
-  │             │ Lit signing │ EigenLayer  │ on Base     │
+  │             │ Lit signing │ EigenLayer  │ on Soroban     │
   ├─────────────┼─────────────┼─────────────┼─────────────┤
-  │  💜 Governance│  💗 Payments│  ❤️ NFT     │             │
+  │   Governance│   Payments│  ️ NFT     │             │
   │ Snapshot,   │ Bankr,      │ SuperRare   │             │
   │ Octant,     │ MoonPay,    │ art and     │             │
   │ Markee      │ Celo        │ bidding     │             │
@@ -513,13 +503,13 @@ All 40+ agents are organized into categories. Here's what each category means:
 | Category       | What It Means                                               | Example Agents                                                                |
 | -------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | **Core**       | The backbone — manages how agents run and work together     | Orchestrator, Super Agent Composer                                            |
-| **DeFi**       | Decentralized Finance — swapping, staking, lending, earning | Uniswap Swap, Lido Staker, Zyfai Solver, bond.credit                          |
-| **AI**         | Artificial Intelligence — thinking, planning, strategizing  | Venice Reasoner, Venice Yield Strategist, Uniswap Strategy Advisor, Olas Mech |
-| **Oracle**     | Data feeds — getting real-time info from the real world     | Chainlink Price Oracle                                                        |
-| **Identity**   | Who are you? — names, addresses, verification               | ENS Resolver, SELF Identity, ENS Agent Name                                   |
+| **DeFi**       | Decentralized Finance — swapping, staking, lending, earning | Soroban Swap Swap, Stellar Staker, Zyfai Solver, bond.credit                          |
+| **AI**         | Artificial Intelligence — thinking, planning, strategizing  | Gemini Reasoner, Gemini Yield Strategist, Soroban Swap Strategy Advisor, Olas Mech |
+| **Oracle**     | Data feeds — getting real-time info from the real world     | Asset Pricer Price Oracle                                                        |
+| **Identity**   | Who are you? — names, addresses, verification               | Federation Resolver, SELF Identity, Federation Agent Name                                   |
 | **Auth**       | Permissions — who can do what                               | MetaMask Delegation, Lit Access Control, Lit PKP Signer                       |
 | **Trust**      | Can I trust this? — verification and security               | ERC-8004 Verifier, EigenCloud Exec, Olas Service, Arkhai Verifier             |
-| **Chain**      | Blockchain execution — sending transactions                 | Base TX Executor                                                              |
+| **Chain**      | Blockchain execution — sending transactions                 | Soroban TX Executor                                                              |
 | **Governance** | Community decisions — voting, grants, campaigns             | Snapshot Voter, Octant Impact, Octant Allocator, Markee Campaign              |
 | **Payments**   | Money movement — wallets, swaps, transfers                  | Bankr Wallet, MoonPay Bridge, Celo Transfer                                   |
 | **NFT**        | Digital art and collectibles                                | SuperRare Lister, SuperRare Bidder                                            |
@@ -530,93 +520,41 @@ All 40+ agents are organized into categories. Here's what each category means:
 
 Here's every agent in AgentFlow, with a one-line description of what it does:
 
-### Core (2 agents)
+### Core
 | Agent                | Sponsor   | What It Does                                            |
 | -------------------- | --------- | ------------------------------------------------------- |
-| Orchestrator         | AgentFlow | Controls how agents run — one at a time or in parallel  |
-| Super Agent Composer | AgentFlow | Bundles multiple agents into one reusable "super agent" |
+| Orchestrator         | AgentFlow | Coordinates execution order and message passing between agents |
 
-### DeFi (8 agents)
-| Agent               | Sponsor     | What It Does                                                              |
-| ------------------- | ----------- | ------------------------------------------------------------------------- |
-| Uniswap Swap        | Uniswap     | Swaps tokens using Uniswap v4 on Base                                     |
-| Uniswap V3 Swap     | Uniswap     | Gets a real swap quote via Odos aggregator and builds transaction         |
-| Uniswap Quoter      | Uniswap     | Gets a price quote for a token swap                                       |
-| Permit2 Approver    | Uniswap     | Approves tokens for swapping without gas                                  |
-| Lido Staker         | Lido        | Stakes ETH in Lido to earn interest (stETH)                               |
-| Lido Yield Treasury | Lido        | Tracks yield and only sends interest to your wallet (never the principal) |
-| Zyfai Solver        | Zyfai       | Finds the best execution path across all protocols                        |
-| bond.credit Issuer  | bond.credit | Creates on-chain bonds (fixed income)                                     |
+### Chain
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Horizon Reader      | Stellar   | Reads account balances and recent operations from Stellar Horizon         |
 
-### AI (4 agents)
-| Agent                    | Sponsor   | What It Does                                     |
-| ------------------------ | --------- | ------------------------------------------------ |
-| Venice Reasoner          | Venice.ai | Private AI thinking — your data is never stored  |
-| Venice Yield Strategist  | Venice.ai | AI recommends what to do with your staking yield |
-| Uniswap Strategy Advisor | Uniswap   | AI decides EXECUTE / WAIT / SKIP for a swap      |
-| Olas Mech                | Olas      | Sends tasks to on-chain AI computation units     |
+### Identity
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Federation Resolver | Stellar   | Resolves federation addresses like "astrobob*stellar.org"                  |
 
-### Oracle (1 agent)
-| Agent            | Sponsor   | What It Does                                |
-| ---------------- | --------- | ------------------------------------------- |
-| Chainlink Oracle | Chainlink | Gets live prices for ETH/USD, BTC/USD, etc. |
+### Oracle
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Asset Pricer        | Stellar   | Fetches Stellar asset prices using public market APIs                     |
 
-### Identity (3 agents)
-| Agent          | Sponsor | What It Does                                               |
-| -------------- | ------- | ---------------------------------------------------------- |
-| ENS Resolver   | ENS     | Turns "vitalik.eth" into a wallet address                  |
-| ENS Agent Name | ENS     | Gives your agent its own .eth name                         |
-| SELF Identity  | SELF    | Verifies age, nationality, etc. without revealing raw data |
+### AI
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Gemini Reasoner     | Google    | Analyzes data and advises based on custom prompts                         |
 
-### Auth (5 agents)
-| Agent                | Sponsor      | What It Does                                        |
-| -------------------- | ------------ | --------------------------------------------------- |
-| MetaMask Delegation  | MetaMask     | Lets agents act on your behalf with limits          |
-| Delegation Scope     | MetaMask     | Restricts what contracts an agent can touch         |
-| Sub-Delegation Chain | MetaMask     | Lets one agent give limited permissions to another  |
-| Lit Access Control   | Lit Protocol | Encrypts data so only approved wallets can see it   |
-| Lit PKP Signer       | Lit Protocol | Signs transactions without exposing the private key |
+### DeFi
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Soroban Swapper     | Soroban   | Executes token swaps using Soroban DeFi protocols                         |
 
-### Trust (4 agents)
-| Agent             | Sponsor    | What It Does                                    |
-| ----------------- | ---------- | ----------------------------------------------- |
-| ERC-8004 Verifier | ERC-8004   | Checks an agent's trust score                   |
-| EigenCloud Exec   | EigenLayer | Runs verified computations backed by EigenLayer |
-| Olas Service      | Olas       | Registers autonomous agent services on-chain    |
-| Arkhai Verifier   | Arkhai     | Verifies data attestations and credentials      |
+### Payments
+| Agent               | Sponsor   | What It Does                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------- |
+| Payment Executor    | Stellar   | Drafts transaction XDRs out of intents to pay                             |
 
-### Chain (1 agent)
-| Agent            | Sponsor | What It Does                              |
-| ---------------- | ------- | ----------------------------------------- |
-| Base TX Executor | Base    | Sends transactions on the Base blockchain |
-
-### Governance (4 agents)
-| Agent            | Sponsor  | What It Does                              |
-| ---------------- | -------- | ----------------------------------------- |
-| Snapshot Voter   | Snapshot | Fetches and votes on DAO proposals        |
-| Octant Impact    | Octant   | Evaluates projects for public good grants |
-| Octant Allocator | Octant   | Distributes grant money to projects       |
-| Markee Campaign  | Markee   | Tracks referral campaign metrics          |
-
-### Payments (7 agents)
-| Agent                | Sponsor | What It Does                                        |
-| -------------------- | ------- | --------------------------------------------------- |
-| MoonPay Bridge       | MoonPay | Buy crypto with credit card or sell crypto for cash |
-| MoonPay Swap         | MoonPay | Cross-chain token swaps and DCA                     |
-| OpenWallet           | MoonPay | Creates a wallet that works on multiple chains      |
-| Bankr Wallet         | Bankr   | Your agent's pre-made wallet with balances          |
-| Bankr Balance        | Bankr   | Checks token balances across all chains             |
-| Bankr AI Agent       | Bankr   | Natural language commands for DeFi actions          |
-| Celo Transfer        | Celo    | Sends stablecoins (cUSD, cEUR) cheaply              |
-| Bankr Yield Executor | Bankr   | Executes yield strategies on-chain                  |
-
-### NFT (2 agents)
-| Agent            | Sponsor   | What It Does                            |
-| ---------------- | --------- | --------------------------------------- |
-| SuperRare Lister | SuperRare | Browses artwork listings and sales data |
-| SuperRare Bidder | SuperRare | Places bids on digital art              |
-
----
 
 ## 10. How Agents Talk to Each Other
 
@@ -627,17 +565,17 @@ This is one of the coolest parts of AgentFlow. When you connect agents in a pipe
 ```
   Agent A runs first
        │
-       │  "Hey Agent B, here's what I found: ETH = $2,146"
+       │  "Hey Agent B, here's what I found: XLM = $2,146"
        │
        ▼
   Agent B receives that info and uses it
        │
-       │  "Thanks! Based on that price, I recommend: EXECUTE the swap"
+       │  "Thanks! Soroband on that price, I recommend: EXECUTE the swap"
        │
        ▼
   Agent C receives BOTH outputs and uses them
        │
-       │  "Got it! Swapping 0.001 ETH → 2.09 USDC. Transaction ready."
+       │  "Got it! Swapping 0.001 XLM → 2.09 USDC. Transaction ready."
        │
        ▼
   Done! Each agent built on the work of the previous one.
@@ -646,19 +584,19 @@ This is one of the coolest parts of AgentFlow. When you connect agents in a pipe
 ### A Real Example
 
 ```
-Pipeline: Chainlink Oracle → Venice AI → Uniswap Swap
+Pipeline: Asset Pricer Oracle → Gemini AI → Soroban Swap Swap
 
   ┌─────────────────────────────────────────────────────────┐
-  │  STEP 1: Chainlink Oracle                               │
-  │  Input:  pricePairs = "ETH/USD"                         │
-  │  Output: { price: 2146.12, pair: "ETH/USD" }           │
+  │  STEP 1: Asset Pricer Oracle                               │
+  │  Input:  pricePairs = "XLM/USD"                         │
+  │  Output: { price: 2146.12, pair: "XLM/USD" }           │
   └───────────────────────┬─────────────────────────────────┘
                           │
                           │  This output is passed as "_upstream"
                           │  to the next agent
                           │
   ┌───────────────────────▼─────────────────────────────────┐
-  │  STEP 2: Venice AI Reasoner                              │
+  │  STEP 2: Gemini AI Reasoner                              │
   │  Input:  systemPrompt = "You are a DeFi advisor"        │
   │  + _upstream = { price: 2146.12 }                       │
   │  Output: { recommendation: "EXECUTE", reason: "..." }   │
@@ -667,8 +605,8 @@ Pipeline: Chainlink Oracle → Venice AI → Uniswap Swap
                           │  Both outputs flow downstream
                           │
   ┌───────────────────────▼─────────────────────────────────┐
-  │  STEP 3: Uniswap V3 Swap                                │
-  │  Input:  tokenIn="ETH", tokenOut="USDC", amount="0.001" │
+  │  STEP 3: Soroban Swap V3 Swap                                │
+  │  Input:  tokenIn="XLM", tokenOut="USDC", amount="0.001" │
   │  + _upstream = { recommendation: "EXECUTE", price: ... } │
   │  Output: { amountOut: "2.09", status: "tx_ready" }       │
   └─────────────────────────────────────────────────────────┘
@@ -680,42 +618,43 @@ Without output chaining, you'd have to manually copy results from one agent and 
 
 ---
 
-## 11. Agent X — Your AI Co-Pilot
+## 11. Agent X — Your AI Co-Pilot (Explained with Chats)
 
-**Agent X** is the AI assistant built into AgentFlow. Think of it as a smart helper that sits in the corner of your screen and can do anything you ask.
+Instead of manually dragging and connecting agents, you can simply chat with Agent X. Agent X uses LLMs to understand your intent and automatically configures nodes and connections on the canvas.
 
-### What Can Agent X Do?
+### Chat Example Workflow
 
-| You Say                                 | Agent X Does                                                        |
-| --------------------------------------- | ------------------------------------------------------------------- |
-| "Build me a DeFi pipeline"              | Creates a full workflow on the canvas, agent by agent, in real-time |
-| "Check ETH price"                       | Runs the Chainlink Oracle and shows you the result                  |
-| "Swap 0.001 ETH to USDC"                | Runs Uniswap V3 Swap and gets a real quote                          |
-| "Run my pipeline"                       | Executes whatever workflow is on your canvas                        |
-| "What agents do you have?"              | Lists all 40+ agents organized by category                          |
-| "Add a Lido Staker to my canvas"        | Places a Lido Staker node on the existing canvas                    |
-| "Explain what the Venice Reasoner does" | Gives a plain English explanation of the agent                      |
-| "Stake 0.01 ETH with Lido"              | Runs the Lido Staker agent directly                                 |
+**User:**
+"I want to take my XLM, earn interest on it using Stellar Staker, and when it grows, swap it to USDC on Soroban Swap."
 
-### How to Open Agent X
+**Agent X:**
+"I can help with that. I'm building a pipeline for you right now. 
+1. Added a Stellar Staker agent to earn interest on your XLM. 
+2. Added a Yield Strategist to monitor the accumulated interest. 
+3. Added a Soroban Swap V3 agent to swap the yielded XLM for USDC. 
+Connecting them now. Please review the pipeline on the canvas."
 
-1. Look for the **purple chat bubble icon** in the toolbar (top of screen)
-2. Click it — a chat panel opens in the bottom-right corner
-3. Start typing!
+*(Agent X automatically updates the canvas with the correctly linked nodes)*
 
-### Agent X Can Build Workflows in Real-Time
+```mermaid
+flowchart LR
+    User([User]) -- "Natural Language Request" --> AgentX{Agent X AI}
+    AgentX -- "Generates Pipeline" --> Canvas[(AgentFlow Canvas)]
+    Canvas --> Stellar Staker[Stellar Staker Node]
+    Canvas --> Strat[Gemini Strategy Node]
+    Canvas --> Uni[Soroban Swap V3 Node]
+    Stellar Staker --> Strat
+    Strat --> Uni
+```
 
-This is the coolest feature. When you ask Agent X to build a pipeline:
+**User:**
+"Can we also add a price check before swapping?"
 
-1. It clears the canvas
-2. It adds each agent one at a time (with a short delay so you can watch)
-3. It draws the connections
-4. It tells you when it's done
-5. You say "run it" and it executes
+**Agent X:**
+"Sure thing. I have inserted a Price Oracle node between the Strategist and Soroban Swap. The swap will now only execute if the price condition is met."
 
-You literally watch the workflow being assembled before your eyes.
+*(The canvas updates immediately, adding a new node without breaking the flow)*
 
----
 
 ## 12. For Developers and Other AI Agents
 
@@ -730,7 +669,7 @@ POST /api/chat
 Content-Type: application/json
 
 {
-  "message": "Swap 0.001 ETH to USDC on Base"
+  "message": "Swap 0.001 XLM to USDC on Soroban"
 }
 ```
 
@@ -758,7 +697,7 @@ POST /api/agents/chainlink-price-oracle
 Content-Type: application/json
 
 {
-  "pricePairs": "ETH/USD,BTC/USD"
+  "pricePairs": "XLM/USD,BTC/USD"
 }
 ```
 
@@ -770,7 +709,7 @@ You get back:
   "success": true,
   "result": {
     "pairs": [
-      { "pair": "ETH/USD", "price": 2146.12 },
+      { "pair": "XLM/USD", "price": 2146.12 },
       { "pair": "BTC/USD", "price": 84231.50 }
     ]
   }
@@ -786,7 +725,7 @@ POST /api/chat
 Content-Type: application/json
 
 {
-  "message": "Build me a yield pipeline with Lido and Venice AI"
+  "message": "Build me a yield pipeline with Stellar Staker and Gemini AI"
 }
 ```
 
@@ -795,7 +734,7 @@ Response includes a `flowData` blueprint:
 {
   "action": "build_flow",
   "flowData": {
-    "flowName": "Lido Yield Pipeline",
+    "flowName": "Stellar Staker Yield Pipeline",
     "agents": [
       { "id": "lido-staker" },
       { "id": "venice-yield-strategy" }
@@ -817,7 +756,7 @@ All agents speak the same language — **AMP (Agent Messaging Protocol)**. This 
   "fromAgent": { "id": "your-agent" },
   "toAgent": { "id": "chainlink-price-oracle" },
   "payload": {
-    "pricePairs": "ETH/USD"
+    "pricePairs": "XLM/USD"
   }
 }
 ```
@@ -841,8 +780,8 @@ Words you might not know, explained simply:
 | **Run Flow**          | Execute the entire pipeline from start to finish                     |
 | **Output Chaining**   | When one agent's result automatically goes to the next agent         |
 | **AMP**               | Agent Messaging Protocol — the standard format agents use to talk    |
-| **ETH**               | Ethereum, a cryptocurrency                                           |
-| **stETH**             | Staked ETH — ETH that's been staked with Lido to earn interest       |
+| **XLM**               | Ethereum, a cryptocurrency                                           |
+| **stXLM**             | Staked XLM — XLM that's been staked with Stellar Staker to earn interest       |
 | **USDC**              | A stablecoin worth $1 (always)                                       |
 | **DEX**               | Decentralized Exchange — a place to swap tokens without a middleman  |
 | **Gas**               | The fee you pay to use a blockchain                                  |
@@ -853,8 +792,8 @@ Words you might not know, explained simply:
 | **NFT**               | Non-Fungible Token — a unique digital item (like digital art)        |
 | **APR**               | Annual Percentage Rate — how much interest you earn per year         |
 | **Slippage**          | The difference between the expected price and actual price of a swap |
-| **ENS**               | Ethereum Name Service — gives wallets human-readable names (.eth)    |
-| **Base**              | A Layer 2 blockchain built on Ethereum (cheaper and faster)          |
+| **Federation**               | Ethereum Name Service — gives wallets human-readable names (.eth)    |
+| **Soroban**              | A Layer 2 blockchain built on Ethereum (cheaper and faster)          |
 | **Topological Order** | The smart order agents should run in based on their connections      |
 | **Inspector**         | The settings panel that opens when you click an agent on the canvas  |
 | **Agent X**           | The AI chat assistant built into AgentFlow                           |
@@ -867,7 +806,7 @@ Words you might not know, explained simply:
 **No!** The whole point of AgentFlow is that you can build complex crypto workflows by dragging blocks and drawing lines. Or just talk to Agent X in plain English.
 
 ### "Is my data private?"
-When using the **Venice AI agents**, yes — Venice.ai provides "zero retention" inference, meaning your data is never stored. Other agents make real API calls to public blockchains, which are inherently transparent.
+When using the **Gemini AI agents**, yes — Gemini.ai provides "zero retention" inference, meaning your data is never stored. Other agents make real API calls to public blockchains, which are inherently transparent.
 
 ### "Does it cost real money?"
 Running flows in AgentFlow itself is free. However, if you execute real transactions on a blockchain (like staking or swapping), those transactions require gas fees paid in crypto.
@@ -876,12 +815,12 @@ Running flows in AgentFlow itself is free. However, if you execute real transact
 Yes! AgentFlow supports **community agents**. You can register a custom agent with its own HTTP endpoint and it will appear in the sidebar alongside the built-in agents.
 
 ### "What blockchains does it support?"
-Primarily **Base** (an Ethereum Layer 2) and **Ethereum mainnet**. Some agents also support Polygon, Celo, Gnosis, Arbitrum, and Solana.
+Primarily **Soroban** (an Ethereum Layer 2) and **Ethereum mainnet**. Some agents also support Polygon, Celo, Gnosis, Arbitrum, and Solana.
 
-### "What is the difference between Uniswap Swap, Uniswap V3 Swap, and Uniswap Quoter?"
-- **Uniswap Swap** — Builds swap calldata using Uniswap v4 hooks
-- **Uniswap V3 Swap** — Gets a real quote via the Odos DEX aggregator and builds a ready-to-sign transaction
-- **Uniswap Quoter** — Just gets a price quote (doesn't build a transaction)
+### "What is the difference between Soroban Swap Swap, Soroban Swap V3 Swap, and Soroban Swap Quoter?"
+- **Soroban Swap Swap** — Builds swap calldata using Soroban Swap v4 hooks
+- **Soroban Swap V3 Swap** — Gets a real quote via the Odos DEX aggregator and builds a ready-to-sign transaction
+- **Soroban Swap Quoter** — Just gets a price quote (doesn't build a transaction)
 
 ### "What if an agent fails?"
 The pipeline will show the error in the log panel. The failed agent turns red on the canvas. Other agents that already completed stay green. You can fix the issue and re-run.
@@ -893,7 +832,7 @@ The pipeline will show the error in the log panel. The failed agent turns red on
 There's no hard limit. You can chain 2 agents or 20 agents. The system runs them in topological order based on how you've connected them.
 
 ### "What is Agent X?"
-Agent X is the AI chat assistant. It's powered by Venice.ai (with a Google Gemini fallback). It can run agents, build workflows, answer questions, and more — all through natural language.
+Agent X is the AI chat assistant. It's powered by Gemini.ai (with a Google Gemini fallback). It can run agents, build workflows, answer questions, and more — all through natural language.
 
 ---
 
@@ -901,13 +840,13 @@ Agent X is the AI chat assistant. It's powered by Venice.ai (with a Google Gemin
 
 1. **Open AgentFlow** at `http://localhost:3000`
 2. **Click the purple chat icon** in the toolbar
-3. **Type:** "Build me a DeFi pipeline with Lido and Uniswap"
+3. **Type:** "Build me a DeFi pipeline with Stellar Staker and Soroban Swap"
 4. **Watch** as agents appear on the canvas in real-time
 5. **Type:** "Run the pipeline"
 6. **Check the log panel** at the bottom to see results
 
-That's it. You just built and ran a multi-agent Web3 workflow. 🎉
+That's it. You just built and ran a multi-agent Web3 workflow. 
 
 ---
 
-*Built for the Synthesis Hackathon — targeting Lido, Bankr, Venice, Uniswap, and more.*
+*Built for the Synthesis Hackathon — targeting Stellar Staker, Bankr, Gemini, Soroban Swap, and more.*
